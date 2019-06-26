@@ -1,0 +1,51 @@
+{
+	"name": "@mudas/payset",
+	"version": "0.0.5-beta",
+	"main": "dist/pay.common.js",
+	"license": "MIT",
+	"author": "mudas",
+	"homepage": "https://github.com/aosnow/payset",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aosnow/payset"
+	},
+	"keywords": [
+		"pay",
+		"form",
+		"business"
+	],
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build --target lib --name pay packages/index.js",
+		"lint": "vue-cli-service lint",
+		"test:unit": "vue-cli-service test:unit",
+		"pub": "npm publish --access=public"
+	},
+	"typings": "types/index.d.ts",
+	"files": [
+		"dist",
+		"types",
+		"package.json",
+		"README.md"
+	],
+	"dependencies": { },
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "^3.8.0",
+		"@vue/cli-plugin-eslint": "^3.8.0",
+		"@vue/cli-plugin-unit-jest": "^3.8.0",
+		"@vue/cli-service": "^3.8.0",
+		"@vue/eslint-config-airbnb": "^4.0.0",
+		"@vue/test-utils": "1.0.0-beta.29",
+		"core-js": "^2.6.5",
+		"element-ui": "^2.9.2",
+		"vue": "^2.6.10",
+		"babel-core": "7.0.0-bridge.0",
+		"babel-eslint": "^10.0.1",
+		"babel-jest": "^23.6.0",
+		"copy-webpack-plugin": "^5.0.3",
+		"eslint": "^5.16.0",
+		"eslint-plugin-vue": "^5.0.0",
+		"happypack": "^5.0.1",
+		"vue-template-compiler": "^2.6.10"
+	}
+}
