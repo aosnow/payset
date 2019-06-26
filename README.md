@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install @yinhe/payset -S
+npm install @mudas/payset -S
 ```
 
 ### README

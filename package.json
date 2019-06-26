@@ -1,6 +1,6 @@
 {
 	"name": "@mudas/payset",
-	"version": "0.0.5-beta",
+	"version": "0.0.6-beta",
 	"main": "dist/pay.common.js",
 	"license": "MIT",
 	"author": "mudas",
