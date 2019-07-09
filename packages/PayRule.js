@@ -4,6 +4,8 @@
 // created: 2019/6/21 18:18
 // ------------------------------------------------------------------------------
 
+const _ = require('lodash/lang');
+
 class PayRule {
 
   // --------------------------------------------------------------------------
@@ -149,7 +151,7 @@ class PayRule {
    * @return {boolean}
    */
   static isPlainObject(ruleValue) {
-    return ruleValue.toString() === '[object Object]';
+    return _.isPlainObject(ruleValue);
   }
 
   /**
@@ -220,8 +222,9 @@ class PayRule {
    * @return {boolean}
    */
   static hasChildRule(ruleValue) {
-    const childRules = Object.keys(ruleValue);// ['greenstatus']
+    if (typeof ruleValue !== 'object') return false;
 
+    const childRules = Object.keys(ruleValue);// ['greenstatus']
     const curKey = childRules[0];// greenstatus
     if (PayRule.isValidRule(ruleValue[curKey])) return true;
 
@@ -238,14 +241,15 @@ class PayRule {
     console.group(`${key} 取值异常提醒`);
     switch (code) {
       case 'invalid config': {
-        console.warn(`无效配置：根级配置项值只能是 String 或 String[] 类型`);
+        console.log(`无效配置：根级配置项值只能是 String 或 String[] 类型`);
         break;
       }
       default: {
-        console.warn(`1、'rule:规则' 中的'规则'只能是 String 或 String[] 类型`);
-        console.warn(`2、非底层取值项配置，取值不能为空，如select必须依赖某个值来决定所取分支规则`);
-        console.warn(`3、若未设置默认值，则相应的将响应规则设置为 ['0','anytype'] 等具体的值`);
-        console.warn(`4、若设置默认值，则需要将默认值改成值列表之一，比如下拉菜单的选项之一的值，也可删除默认值使用方案 3`);
+        console.log(`1、请确认 ${key} 是否拼写正确，并且在 model 中已定义`);
+        console.log(`2、'rule:规则' 中的'规则'只能是 String 或 String[] 类型`);
+        console.log(`3、非底层取值项配置，取值不能为空，如select必须依赖某个值来决定所取分支规则`);
+        console.log(`4、若未设置默认值，则相应的将响应规则设置为 ['0','anytype'] 等具体的值`);
+        console.log(`5、若设置默认值，则需要将默认值改成值列表之一，比如下拉菜单的选项之一的值，也可删除默认值使用方案 3`);
       }
     }
     console.groupEnd();

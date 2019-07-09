@@ -4,14 +4,6 @@
 ```
 npm install @mudas/payset -S
 ```
-
-## Changelog
-### v0.0.8-beta
-- 优化调整细节
-### v0.0.7-beta
-- 20190709：rule 增强根级简单值支持，支持 `rule: ['','required']` 数组，以及原有的 `rule:'required'` 字符串型
-- 完善 `types/index.d.ts` 类型支持
-
 ### README
 ```
 
@@ -115,3 +107,12 @@ const config = {
 3、位于中间层的规则，因为其做为后续规则的依赖项目，应该不论哪种情况都返回具体的值，来给予后续规则指引具体的取值分支
 
 ```
+
+## Changelog
+### v0.0.9-beta
+- 优化规则匹配算法，适当使用 `lodash` 函数
+### v0.0.8-beta
+- 优化调整细节
+### v0.0.7-beta
+- 20190709：rule 增强根级简单值支持，支持 `rule: ['','required']` 数组，以及原有的 `rule:'required'` 字符串型
+- 完善 `types/index.d.ts` 类型支持

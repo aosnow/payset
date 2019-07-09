@@ -1,6 +1,6 @@
 {
 	"name": "@mudas/payset",
-	"version": "0.0.8-beta",
+	"version": "0.0.9-beta",
 	"main": "dist/pay.common.js",
 	"license": "MIT",
 	"author": "mudas",
@@ -28,7 +28,9 @@
 		"package.json",
 		"README.md"
 	],
-	"dependencies": { },
+	"dependencies": {
+		"lodash": "^4.17.11"
+	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "^3.8.0",
 		"@vue/cli-plugin-eslint": "^3.8.0",
