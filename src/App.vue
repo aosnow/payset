@@ -8,13 +8,18 @@
 
 <script>
 
-import { createModel, createObServer } from '@yinhe/payset';
+import { createModel, createObServer } from '@mudas/payset';
 
 import FormA from './FormA';
 import FormB from './FormB';
 
 export default {
   name: 'app',
+
+  components: {
+    FormA,
+    FormB
+  },
   mixins: [
     createModel({
       data: {
@@ -41,7 +46,7 @@ export default {
           rule: {
             usertype: {
               1: 'hide',
-              2: 'custom',
+              2: ['xxx', 'custom', 'required'],
               3: 'required'
             }
           }
@@ -59,11 +64,7 @@ export default {
       },
       watchs: ['usertype']
     })
-  ],
-  components: {
-    FormA,
-    FormB
-  }
+  ]
 };
 </script>
 

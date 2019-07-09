@@ -49,7 +49,7 @@ class PayRule {
 
   /**
    * config.rule 规则配置
-   * @type {{}}
+   * @type {{}|String|String[]}
    * @private
    */
   _rule = null;
@@ -275,16 +275,22 @@ class PayRule {
   /**
    * 应用简单规则
    * <p>即不依赖于任何字段的自主规则，如 {rule:'required'}</p>
-   * @param {String} rule 单向无依赖规则
+   * @param {String|Array} ruleValue 单向无依赖规则
    * @private
    */
-  _simpleUse(rule) {
+  _simpleUse(ruleValue) {
     // 不执行非简单规则
-    if (typeof rule !== 'string') return;
+    if (!PayRule.isFinalValue(ruleValue)) return;
 
     // 字符串模式不支持复合视觉
-    const { value, display } = this._parseSingleValue({}, rule);
-    this.setValue(value, display);
+    if (typeof ruleValue === 'string') {
+      const { value, display } = this._parseSingleValue({}, ruleValue);
+      this.setValue(value, display);
+    }
+    else {
+      const display = this._parseArrayValue({}, ruleValue.slice(1));
+      this.setValue(ruleValue[0], display);
+    }
   }
 
   /**
@@ -373,7 +379,10 @@ class PayRule {
     // 正确性检测
     // 函数类型配置不能作为顶级配置，其依赖于目标字段来取值
     if (PayRule.isFunction(rule)) {
-      PayRule.error({ key: this.key, code: 'invalid config' });
+      PayRule.error({
+        key: this.key,
+        code: 'invalid config'
+      });
     }
 
     // 当前层级中查找对应 key 字段

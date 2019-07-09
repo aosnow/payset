@@ -6,6 +6,10 @@
 
 import Vue, { Component } from 'vue';
 
+type DefaultData<V> =  object | ((this: V) => object);
+type DefaultMethods<V> =  { [key: string]: (this: V, ...args: any[]) => any };
+type DefaultComputed = { [key: string]: any };
+
 type PayRuleConfig = object;
 type RuleValue = string | Array<string> | RuleHandler | { watch:Array<string>, handler:RuleHandler } | object;
 
@@ -33,14 +37,49 @@ declare interface PayRuleCallback
   ( this:PayRule, value:string, displayValue:DisplayRule ):void;
 }
 
-declare function createModel( options:PayRuleModel ):Component;
+type ModelData = {
+  /**
+   * 全量数据
+   * @type {{}}
+   */
+  payData:any;
+
+  /**
+   * 对应 payData 的视觉控制数据
+   * <p>字段对应 payData 的字段配置</p>
+   */
+  payDisplay:any;
+}
+
+declare function createModel( options:PayRuleModel ):Component<ModelData>;
+
+type ClientProps = {
+  /**
+   * 全量数据
+   * @type {{}}
+   */
+  payData:any;
+
+  /**
+   * 对应 PayData 的视觉控制数据
+   * <p>
+   * 目前支持属性如下：
+   * <li>show: 是否显示元素（作用于 form-item）</li>
+   * <li>disabled：是否禁用元素（作用于 form-item 或者 表单控件）</li>
+   * <li>required：必填字段（红色星号提醒）</li>
+   * <li>custom：选填字段</li>
+   * </p>
+   * 类型：<code>{any:{hide:Boolean, disabled:Boolean}}</code>
+   */
+  payDisplay:any;
+}
 
 /**
  * 要求本地组件包含 data.innerData 属性
  * @param [dataName] 自定义本地数据字段名
  * @return {{}}
  */
-declare function createObClient( dataName?:string ):Component;
+declare function createObClient( dataName?:string ):Component<DefaultData<never>, DefaultMethods<never>, DefaultComputed, ClientProps>;
 
 declare function createObServer( options:{ config:PayRuleConfig, watchs:Array<string> } ):Component;
 

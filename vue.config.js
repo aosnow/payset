@@ -10,7 +10,7 @@ const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-// const isDebug = process.env.NODE_ENV === 'development';
+const isDebug = process.env.NODE_ENV === 'development';
 
 function resolve(...dir) {
   return path.join(__dirname, ...dir);
@@ -55,12 +55,14 @@ module.exports = {
 
     // 路径别名
     config.resolve.alias.set('@', resolve('src'));
-    config.resolve.alias.set('@yinhe/payset', resolve('packages/index.js'));
+    config.resolve.alias.set('@mudas/payset', resolve('packages/index.js'));
 
     // 不生成 html
-    config.plugins.delete('html');
-    config.plugins.delete('preload');
-    config.plugins.delete('prefetch');
+    if (!isDebug) {
+      config.plugins.delete('html');
+      config.plugins.delete('preload');
+      config.plugins.delete('prefetch');
+    }
 
   }
 };

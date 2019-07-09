@@ -15,7 +15,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': resolve('src'),
-      '@yinhe/payset': resolve('packages/index.js')
+      '@mudas/payset': resolve('packages/index.js')
     }
   }
 };

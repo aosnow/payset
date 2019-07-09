@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { createObClient, DisplayFormItem } from '@yinhe/payset';
+import { createObClient, DisplayFormItem } from '@mudas/payset';
 
 export default {
   name: 'FormA',

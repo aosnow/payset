@@ -1,6 +1,6 @@
 {
 	"name": "@mudas/payset",
-	"version": "0.0.6-beta",
+	"version": "0.0.8-beta",
 	"main": "dist/pay.common.js",
 	"license": "MIT",
 	"author": "mudas",
@@ -19,7 +19,7 @@
 		"build": "vue-cli-service build --target lib --name pay packages/index.js",
 		"lint": "vue-cli-service lint",
 		"test:unit": "vue-cli-service test:unit",
-		"pub": "npm publish --access=public"
+		"pub": "npm run build && npm publish --access=public"
 	},
 	"typings": "types/index.d.ts",
 	"files": [
