@@ -4,7 +4,7 @@
 // created: 2019/6/21 18:18
 // ------------------------------------------------------------------------------
 
-const _ = require('lodash/lang');
+import { isPlainObject } from 'lodash-es';
 
 class PayRule {
 
@@ -151,7 +151,7 @@ class PayRule {
    * @return {boolean}
    */
   static isPlainObject(ruleValue) {
-    return _.isPlainObject(ruleValue);
+    return isPlainObject(ruleValue);
   }
 
   /**

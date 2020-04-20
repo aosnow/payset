@@ -11,7 +11,7 @@ import createObServer from './vue/ObServer';
 import PayRule from './PayRule';
 import PayRuleManager from './PayRuleManager';
 
-import DisplayFormItem from './vue/DisplayFormItem';
+import DisplayFormItem from './vue/DisplayFormItem.vue';
 
 export {
   createModel,

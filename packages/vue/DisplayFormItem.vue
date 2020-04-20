@@ -54,7 +54,7 @@ export default {
 
   computed: {
     truthyRules() {
-      return this.rules ? Object.assign({}, this.rules, { required: this.isRequired }) : null;
+      return this.rules ? { ...this.rules, ...{ required: this.isRequired } } : null;
     },
 
     isDisabled() {

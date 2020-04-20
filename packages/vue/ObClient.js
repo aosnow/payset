@@ -33,11 +33,12 @@ const ObClient = {
       if (!this[this.dataName]) return;
 
       // payData 更新时，将组件内关心的数据更新到本地
-      Object.keys(this[this.dataName]).forEach(key => {
-        if (this[this.dataName][key] !== payData[key]) {
-          this[this.dataName][key] = payData[key];
-        }
-      });
+      Object.keys(this[this.dataName])
+            .forEach(key => {
+              if (this[this.dataName][key] !== payData[key]) {
+                this[this.dataName][key] = payData[key];
+              }
+            });
       this.$emit('sync');
     }
   },
@@ -63,7 +64,7 @@ const ObClient = {
  * @return {{}}
  */
 function createObClient(dataName) {
-  const inst = Object.assign({}, ObClient);
+  const inst = { ...ObClient };
 
   dataName = dataName || 'innerData';
 

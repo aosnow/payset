@@ -5,50 +5,26 @@
 // ------------------------------------------------------------------------------
 
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const HappyPack = require('happypack');
-const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
-const isDebug = process.env.NODE_ENV === 'development';
+const DEBUG = process.env.NODE_ENV === 'development';
 
 function resolve(...dir) {
   return path.join(__dirname, ...dir);
 }
 
 module.exports = {
+  publicPath: DEBUG ? '/' : './',
+  outputDir: 'dist',
+  assetsDir: '',
   productionSourceMap: false,
 
+  css: {
+    // 强制将所有 css 内容内联
+    // 对于 lib 的打包不宜输出独立的 css 文件
+    extract: false
+  },
+
   configureWebpack: {
-
-    entry: resolve('src/main.js'),
-
-    // 不分割任何模块
-    optimization: {
-      splitChunks: false
-    },
-
-    // 排除 'element-ui'
-    externals: [{
-      Vue: 'vue',
-      ElementUI: 'element-ui'
-    }],
-
-    // 输出设置
-    output: {
-      filename: '[name].js',
-      chunkFilename: '[name].[contenthash:8].js'
-    },
-
-    // 复制插件
-    plugins: [
-      new CopyPlugin(['packages/readme.txt']),
-      new HappyPack({
-        id: 'happyBabel',
-        loaders: [{ loader: 'babel-loader?cacheDirectory=true' }],
-        threadPool: happyThreadPool
-      })
-    ]
+    entry: resolve('src/main.js')
   },
 
   chainWebpack: (config) => {
@@ -56,13 +32,6 @@ module.exports = {
     // 路径别名
     config.resolve.alias.set('@', resolve('src'));
     config.resolve.alias.set('@mudas/payset', resolve('packages/index.js'));
-
-    // 不生成 html
-    if (!isDebug) {
-      config.plugins.delete('html');
-      config.plugins.delete('preload');
-      config.plugins.delete('prefetch');
-    }
 
   }
 };

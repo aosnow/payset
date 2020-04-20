@@ -33,7 +33,7 @@ const ObServer = {
 };
 
 function createObServer({ config, watchs }) {
-  const inst = Object.assign({}, ObServer);
+  const inst = { ...ObServer };
 
   // PayRuleManager
   inst.created = function created() {
